@@ -18,6 +18,8 @@ csvpath = os.path.join('Resources', 'budget_data.csv')
 net = 0
 months = 0
 month_change = []
+max_inc = 0.0
+max_dec = 0.0
 
 # prove it is being read
 with open(csvpath) as csvfile:
@@ -36,8 +38,18 @@ with open(csvpath) as csvfile:
         ## print(row)
         months += 1
         net += float(row[1])
-        net_dollar = "${:.2f}".format(net) #"${:,.2f}".format(net) format with commas
-        month_change[row-1] = float()
+        net_dollar = "${:.2f}".format(net)      #"${:,.2f}".format(net) format with commas
+        # month_change[row-1] = float()
+        if float(row[1]) > max_inc:
+            max_inc = float(row[1])
+            inc_month = row[0]
+        if float(row[1]) < max_dec:
+            max_dec = float(row[1])
+            dec_month = row[0]
 
-    print (f"{months}")
-    print(f"{net_dollar}")
+print(f"Financial Analysis")
+print(f"----------------------------")
+print(f"Total Months: {months}")
+print(f"Net Total Amount: {net_dollar}")
+print(f"Greatest Increase in Profits: {inc_month} ({max_inc})")
+print(f"Greatest Decrease in Profits: {dec_month} ({max_dec})")
