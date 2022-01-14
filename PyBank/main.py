@@ -12,8 +12,10 @@
 
 import os
 import csv
+import sys
 
 csvpath = os.path.join('Resources', 'budget_data.csv')
+output_path = os.path.join("Analysis", "Financial_Analysis.txt")
 
 net = 0
 months = 0
@@ -47,9 +49,26 @@ with open(csvpath) as csvfile:
             max_dec = float(row[1])
             dec_month = row[0]
 
+#print to terminal
 print(f"Financial Analysis")
 print(f"----------------------------")
 print(f"Total Months: {months}")
 print(f"Net Total Amount: {net_dollar}")
+print(f"Average Change: {net_dollar}")
 print(f"Greatest Increase in Profits: {inc_month} ({max_inc})")
 print(f"Greatest Decrease in Profits: {dec_month} ({max_dec})")
+
+
+#print to output text file
+with open(output_path, "w") as datafile:
+    writer = csv.writer(datafile)
+
+    writer.writerow([f"Financial Analysis"])
+    writer.writerow([f"----------------------------"])
+    writer.writerow([f"Total Months: {months}"])
+    writer.writerow([f"Net Total Amount: {net_dollar}"])
+    writer.writerow([f"Average Change: {net_dollar}"])
+    writer.writerow([f"Greatest Increase in Profits: {inc_month} ({max_inc})"])
+    writer.writerow([f"Greatest Decrease in Profits: {dec_month} ({max_dec})"])
+
+
