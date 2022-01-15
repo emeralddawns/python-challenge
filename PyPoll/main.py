@@ -16,6 +16,9 @@ import csv
 csvpath = os.path.join('Resources', 'election_data.csv')
 output_path = os.path.join("Analysis", "Election_Results.txt")
 
+#initialize values
+votes = 0
+
 with open(csvpath) as csvfile:
 
     # CSV reader specifies delimiter and variable that holds contents
@@ -26,3 +29,22 @@ with open(csvpath) as csvfile:
 
     # Read each row of data after the header, make calculations, and store values
     for row in csvreader:
+        votes += 1
+
+
+#summarize the data in one place so that the terminal and output .txt receive the same information
+line = (f"-------------------------")
+summary = [(f"Election Results"),
+            (line),
+            (f"Total Votes: {votes}"),
+            (line),]
+
+#print to the terminal
+for line in summary:
+    print(line)
+
+#print to the .txt file
+with open(output_path, "w", newline = '') as datafile:
+    writer = csv.writer(datafile)
+    for line in summary:
+        writer.writerow([line])
