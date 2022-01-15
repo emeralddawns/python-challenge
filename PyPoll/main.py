@@ -20,7 +20,7 @@ output_path = os.path.join("Analysis", "Election_Results.txt")
 votes = 0
 candidates = []
 vote_count = []
-# percentage = []
+print_line = []
 i=int(0)
 j=int(0)
 
@@ -39,6 +39,7 @@ with open(csvpath) as csvfile:
         if row[2] not in candidates:        
             candidates.append(row[2])       #create list of unique candidates
             vote_count.append(int(1))       #create list of vote counts for unique candidates
+            print_line.append(0)            #create a proper sized print_line list for output purposes
         else:
             i = 0    
             for name in candidates:
@@ -51,6 +52,7 @@ with open(csvpath) as csvfile:
     print(f"{candidates}")
     print(f"{vote_count}")
     print(f"{percent_vote}")
+
 #summarize the data in one place so that the terminal and output .txt receive the same information
 line = (f"-------------------------")
 summary_header = [(f"Election Results"),
@@ -58,19 +60,20 @@ summary_header = [(f"Election Results"),
             (f"Total Votes: {votes}"),
             (line),]
 
-#for names in candidates:
-#    percent_vote[j] = "{:.3%}".format(percent_vote[j])
-#    print(f"{candidates[j]}: {percent_vote[j]} ({vote_count[j]})")
-#    j+=1
+
+for names in candidates:
+    percent_vote[j] = "{:.3%}".format(percent_vote[j])
+    print_line[j] = f"{candidates[j]}: {percent_vote[j]} ({vote_count[j]})"
+    j+=1
 
 #print to the terminal
 for line in summary_header:
     print(line)
 
-for names in candidates:
-    percent_vote[j] = "{:.3%}".format(percent_vote[j])
-    print(f"{candidates[j]}: {percent_vote[j]} ({vote_count[j]})")
-    j+=1
+for lines in print_line:
+    print(print_line)
+
+
 
 #print to the .txt file
 with open(output_path, "w", newline = '') as datafile:
