@@ -6,6 +6,7 @@ Both codes open their corresponding CSV, read thru the values and calculate/crea
 
 # What the codes calculate
 The **PyBank** code currently calculates the following:
+
     The total number of months included in the dataset
 
     The net total amount of "Profit/Losses" over the entire period
@@ -18,6 +19,7 @@ The **PyBank** code currently calculates the following:
 
 
  The **PyPoll** code currently calculates the following:
+ 
     The total number of votes cast
 
     A complete list of candidates who received votes
