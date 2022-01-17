@@ -4,7 +4,7 @@ This assignment consisted of using python in VSCode to work with CSV files, perf
 # What each code does (in general terms)
 Both codes open their corresponding CSV, read thru the values and calculate/create any desired values or lists, and then print summaries to both the terminal and a text file
 
-# What the codes calculate
+# What each code calculates
 The **PyBank** code currently calculates the following:
 
     The total number of months included in the dataset
@@ -19,7 +19,7 @@ The **PyBank** code currently calculates the following:
 
 
  The **PyPoll** code currently calculates the following:
- 
+
     The total number of votes cast
 
     A complete list of candidates who received votes
