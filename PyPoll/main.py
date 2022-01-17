@@ -21,7 +21,6 @@ votes = 0
 candidates = []
 vote_count = []
 print_line = []
-j=int(0)
 
 with open(csvpath) as csvfile:
 
@@ -63,6 +62,7 @@ summary_winner = [(dashes),
                     (f"Winner: {winner}"),
                     (dashes)]
 
+j=int(0)
 for names in candidates:
     print_line[j] = f"{candidates[j]}: {percent_vote[j]} ({vote_count[j]})"
     j+=1
@@ -71,8 +71,7 @@ for names in candidates:
 for line in summary_header:
     print(line)
 
-for lines in print_line:
-    print(print_line)
+print(*print_line, sep="\n")
 
 for line in summary_winner:
     print(line)
@@ -83,10 +82,13 @@ with open(output_path, "w", newline = '') as datafile:
     for line in summary_header:
         writer.writerow([line])
 
-    j = int(0)
-    for names in candidates:
-        writer.writerow([f"{candidates[j]}: {percent_vote[j]} ({vote_count[j]})"])
-        j += 1
+    writer.writerow('\n'.join(print_line))
 
     for line in summary_winner:
         writer.writerow([line])
+
+
+#    j = int(0)
+#    for names in candidates:
+#        writer.writerow([f"{candidates[j]}: {percent_vote[j]} ({vote_count[j]})"])
+#        j += 1
