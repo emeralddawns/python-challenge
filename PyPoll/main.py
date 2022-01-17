@@ -34,7 +34,7 @@ with open(csvpath) as csvfile:
         if row[2] not in candidates:        
             candidates.append(row[2])       #create list of unique candidates
             vote_count.append(int(1))       #create list of vote counts for unique candidates
-            print_line.append(0)            #create a proper sized print_line list for output purposes
+            print_line.append(0)            #create a proper sized print_line list for the output
         else:
             i = 0    
             for name in candidates:
