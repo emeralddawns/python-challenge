@@ -1,11 +1,8 @@
+ #This code currently calculates the following:
  # * The total number of votes cast
-
  # * A complete list of candidates who received votes
-
  # * The percentage of votes each candidate won
-
  # * The total number of votes each candidate won
-
  # * The winner of the election based on popular vote.
 
 #import useful functions
@@ -58,14 +55,16 @@ summary_header = [(f"Election Results"),
             (dashes),
             (f"Total Votes: {votes}"),
             (dashes),]
+
+j=int(0)        #create the "Candidate: Votes% (Vote Count)" lines
+for names in candidates:
+    print_line[j] = f"{candidates[j]}: {percent_vote[j]} ({vote_count[j]})"
+    j+=1
+
 summary_winner = [(dashes),
                     (f"Winner: {winner}"),
                     (dashes)]
 
-j=int(0)
-for names in candidates:
-    print_line[j] = f"{candidates[j]}: {percent_vote[j]} ({vote_count[j]})"
-    j+=1
 
 #print to the terminal
 for line in summary_header:
@@ -76,19 +75,14 @@ print(*print_line, sep="\n")
 for line in summary_winner:
     print(line)
 
+
 #print to the .txt file
 with open(output_path, "w", newline = '') as datafile:
-    writer = csv.writer(datafile)
+    writer = csv.writer(datafile, delimiter = '\n')
     for line in summary_header:
         writer.writerow([line])
 
-    writer.writerow('\n'.join(print_line))
+    writer.writerow(print_line)
 
     for line in summary_winner:
         writer.writerow([line])
-
-
-#    j = int(0)
-#    for names in candidates:
-#        writer.writerow([f"{candidates[j]}: {percent_vote[j]} ({vote_count[j]})"])
-#        j += 1
