@@ -21,7 +21,6 @@ votes = 0
 candidates = []
 vote_count = []
 print_line = []
-i=int(0)
 j=int(0)
 
 with open(csvpath) as csvfile:
@@ -48,21 +47,23 @@ with open(csvpath) as csvfile:
                 i += 1
 
     percent_vote = [(x / votes) for x in vote_count]      #calculate the percentage of votes received
+    percent_vote = ["{:.3%}".format(x) for x in percent_vote]   #format the percentage values
 
-    print(f"{candidates}")
-    print(f"{vote_count}")
-    print(f"{percent_vote}")
+    max_votes = max(vote_count)             #find max votes
+    winner_index = vote_count.index(max_votes)  #find index for max votes
+    winner = candidates[winner_index]       #use index to find name of winner
 
 #summarize the data in one place so that the terminal and output .txt receive the same information
-line = (f"-------------------------")
+dashes = (f"-------------------------")
 summary_header = [(f"Election Results"),
-            (line),
+            (dashes),
             (f"Total Votes: {votes}"),
-            (line),]
-
+            (dashes),]
+summary_winner = [(dashes),
+                    (f"Winner: {winner}"),
+                    (dashes)]
 
 for names in candidates:
-    percent_vote[j] = "{:.3%}".format(percent_vote[j])
     print_line[j] = f"{candidates[j]}: {percent_vote[j]} ({vote_count[j]})"
     j+=1
 
@@ -73,7 +74,8 @@ for line in summary_header:
 for lines in print_line:
     print(print_line)
 
-
+for line in summary_winner:
+    print(line)
 
 #print to the .txt file
 with open(output_path, "w", newline = '') as datafile:
@@ -83,6 +85,8 @@ with open(output_path, "w", newline = '') as datafile:
 
     j = int(0)
     for names in candidates:
-#        percent_vote[j] = "{:.0%}".format(percent_vote[j])
         writer.writerow([f"{candidates[j]}: {percent_vote[j]} ({vote_count[j]})"])
         j += 1
+
+    for line in summary_winner:
+        writer.writerow([line])
